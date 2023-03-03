@@ -4,6 +4,7 @@ local uis = game:GetService("UserInputService")
 local replicatedStorage = game:GetService("ReplicatedStorage")
 
 local plr = game:GetService("Players").LocalPlayer
+script.Parent = plr
 
 local speed = 16
 local maxSpeed = 64
@@ -30,22 +31,39 @@ local cd = 0.05
 
 local p,s
 
-local attach = Instance.new("Attachment")
-attach.Parent = plr.Character.HumanoidRootPart
-attach.CFrame = CFrame.new(0,0,0)
+local attach
 
-local alignOrientation = Instance.new("AlignOrientation",plr.Character.HumanoidRootPart)
-alignOrientation.Attachment0 = attach
-alignOrientation.AlignType = Enum.AlignType.Parallel
-alignOrientation.Mode = Enum.OrientationAlignmentMode.OneAttachment
-alignOrientation.Responsiveness = 15
+local alignOrientation
+local alignPosition
 
-local alignPosition = Instance.new("AlignPosition",plr.Character.HumanoidRootPart)
-alignPosition.Attachment0 = attach
-alignPosition.Mode = Enum.PositionAlignmentMode.OneAttachment
-alignPosition.Enabled = false
-alignPosition.MaxForce = math.huge
-alignPosition.MaxVelocity = speed
+local died
+local rs
+
+function generate(c)
+	attach = Instance.new("Attachment")
+	attach.Parent = c.HumanoidRootPart
+	attach.CFrame = CFrame.new(0,0,0)
+
+	alignOrientation = Instance.new("AlignOrientation",c.HumanoidRootPart)
+	alignOrientation.Attachment0 = attach
+	alignOrientation.AlignType = Enum.AlignType.Parallel
+	alignOrientation.Mode = Enum.OrientationAlignmentMode.OneAttachment
+	alignOrientation.Responsiveness = 15
+
+	alignPosition = Instance.new("AlignPosition",c.HumanoidRootPart)
+	alignPosition.Attachment0 = attach
+	alignPosition.Mode = Enum.PositionAlignmentMode.OneAttachment
+	alignPosition.Enabled = false
+	alignPosition.MaxForce = math.huge
+	alignPosition.MaxVelocity = speed
+
+	died = c.Humanoid.Died:Connect(function()
+		died:Disconnect()
+		rs:Disconnect()
+	end)
+end
+
+generate(plr.Character)
 
 function sendServerEvent(t,p,a)
 	local event = replicatedStorage:FindFirstChild("jetpackEvent")
@@ -127,13 +145,6 @@ function findJetpackComps(plr)
 	end
 	return nil
 end
-
-local died
-local rs
-died = plr.Character.Humanoid.Died:Connect(function()
-	died:Disconnect()
-	rs:Disconnect()
-end)
 
 local f = 0
 rs = game:GetService("RunService").RenderStepped:Connect(function(delta)
@@ -275,6 +286,16 @@ rs = game:GetService("RunService").RenderStepped:Connect(function(delta)
 		plr.Character.Humanoid.PlatformStand = false
 		plr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.GettingUp)
 	end
+end)
+
+plr.CharacterAdded:Connect(function(c)
+
+	repeat task.wait() until c.HumanoidRootPart
+
+	generate(c)
+	sendServerEvent("Generate")
+
+	p,s = findJetpackComps(plr)
 end)
 
 repeat task.wait() until replicatedStorage:FindFirstChild("jetpackEvent")
