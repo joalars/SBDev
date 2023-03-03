@@ -114,7 +114,7 @@ function generate(plr)
 	})
 	
 	local song = ins("Sound",{
-		{"SoundId","rbxassetid://9044545570"}, --SONG
+		{"SoundId","rbxassetid://0"}, --SONG
 		{"Looped",true},
 		{"Name","Song"},
 		{"Parent",p1}
