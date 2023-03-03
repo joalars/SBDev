@@ -22,6 +22,10 @@ local flying = false
 local hovering = false
 local hoverPoint = nil
 
+local stunned = false
+local stunnedFrames = 0
+local stunDuration = 2.5
+
 local cd = 0.05
 
 local p,s
@@ -130,10 +134,6 @@ died = plr.Character.Humanoid.Died:Connect(function()
 	died:Disconnect()
 	rs:Disconnect()
 end)
-
-local stunned = false
-stunnedFrames = 0
-stunDuration = 2.5
 
 local f = 0
 rs = game:GetService("RunService").RenderStepped:Connect(function(delta)
