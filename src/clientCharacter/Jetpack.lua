@@ -40,6 +40,12 @@ local died
 local rs
 
 function generate(c)
+
+	onGround = true
+	flying = false
+	turbo = false
+	hovering = false
+
 	attach = Instance.new("Attachment")
 	attach.Parent = c.HumanoidRootPart
 	attach.CFrame = CFrame.new(0,0,0)
