@@ -114,14 +114,14 @@ function generate(plr)
 	})
 	
 	local song = ins("Sound",{
-		{"SoundId","rbxassetid://0"}, --SONG
+		{"SoundId","rbxassetid://12697958247"}, --SONG
 		{"Looped",true},
 		{"Name","Song"},
 		{"Parent",p1}
 	})
 	
 	local tsound = ins("Sound",{
-		{"SoundId","rbxassetid://12659320869"},
+		{"SoundId","rbxassetid://12697962063"},
 		{"Looped",true},
 		{"Name","Thruster"},
 		{"Pitch",((1/64)*0.25)*20 + 0.5},
