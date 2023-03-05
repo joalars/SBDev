@@ -1,5 +1,6 @@
 {
     "robloxLsp.diagnostics.globals": [
-        "__jetpack"
+        "__jetpack",
+        "__verasReborn"
     ]
 }
