@@ -241,7 +241,7 @@ rs = game:GetService("RunService").RenderStepped:Connect(function(delta)
 		p,s = findJetpackComps(plr)
 		if p then
 			--print(changed)
-			if changed == true then
+			if changed == true and flycdcur <= 0 then
 				--print("UPDATED")
 				sendServerEvent("Speed",p,-speed/maxSpeed)
 				changed = false
