@@ -3,7 +3,6 @@ print("Jetpack - Server")
 
 local plr
 local replicatedStorage = game:GetService("ReplicatedStorage")
-local runService = game:GetService("RunService")
 local tweenService = game:GetService("TweenService")
 
 repeat
@@ -173,8 +172,7 @@ function generate(plr)
 	})
 end
 
-function enableSound(s)
-	local ts = s.Pitch
+function enableSound(s,spd)
 	local tweenInfo = TweenInfo.new(
 		0.3,
 		Enum.EasingStyle.Linear,
@@ -184,11 +182,17 @@ function enableSound(s)
 		0
 	)
 
-	local newTween = tweenService:Create(s,tweenInfo,{"Pitch",0,ts}):Play()
+	local g = {}
+	g.Pitch = ((1/64)*0.25)*spd + 0.5
+
+	s.Pitch = 0
+
+	local newTween = tweenService:Create(s,tweenInfo,g)
+	s:Play()
+	newTween:Play()
 end
 
-function disableSound(s)
-	local ts = s.Pitch
+function disableSound(s,spd)
 	local tweenInfo = TweenInfo.new(
 		0.3,
 		Enum.EasingStyle.Linear,
@@ -198,7 +202,21 @@ function disableSound(s)
 		0
 	)
 
-	local newTween = tweenService:Create(s,tweenInfo,{"Pitch",ts,0}):Play()
+	local sm = ((1/64)*0.25)*spd + 0.5
+
+	local g = {}
+	g.Pitch = 0
+
+	local newTween = tweenService:Create(s,tweenInfo,g)
+	newTween:Play()
+	local c
+	c = newTween.Completed:Connect(function()
+		c:Disconnect()
+		if s.Pitch == 0 then
+			s:Stop()
+			s.Pitch = sm
+		end
+	end)
 end
 
 local jetpackEvent
@@ -239,7 +257,7 @@ function restoreEvent()
 					print("Flying signal")
 					if p.Parent == plr.Character then
 						print("Valid player")
-						if a == true then
+						if a[1] == true then
 							print("True")
 							for i,v in pairs(p:GetChildren()) do
 								local f = v:FindFirstChild("Fire")
@@ -249,7 +267,7 @@ function restoreEvent()
 								end
 								local f = v:FindFirstChild("Thruster")
 								if f then
-									f:Play()
+									enableSound(f,a[2])
 								end
 							end
 						else
@@ -262,7 +280,7 @@ function restoreEvent()
 								end
 								local f = v:FindFirstChild("Thruster")
 								if f then
-									f:Stop()
+									disableSound(f,a[2])
 								end
 							end
 						end

@@ -20,6 +20,9 @@ local inc = os.clock()
 local onGround = true
 local flying = false
 
+local flycd = 0.3
+local flycdcur = 0
+
 local hovering = false
 local hoverPoint = nil
 
@@ -85,16 +88,31 @@ uis.InputBegan:Connect(function(input, gameProcessed)
 		if input.UserInputType == Enum.UserInputType.Keyboard then
 			if input.KeyCode == Enum.KeyCode.R then
 				--print("+R")
-				increasing = true
+				if flycdcur <= 0 then
+					increasing = true
+				end
 			elseif input.KeyCode == Enum.KeyCode.F then
 				--print("+F")
-				decreasing = true
+				if flycdcur <= 0 then
+					decreasing = true
+				end
 			elseif input.KeyCode == Enum.KeyCode.Space then
 				--print("+Space")
-				if onGround == false then
-					flying = true
-					sendServerEvent("Flying",p,true)
-					--print("+Flying")
+				if flycdcur <= 0 then
+					if onGround == false and flying == false then
+						flying = true
+						sendServerEvent("Flying",p,{true,speed})
+						flycdcur = flycd
+						--print("+Flying")
+					elseif flying == true then
+						flying = false
+						turbo = false
+						sendServerEvent("Flying",p,{false,speed})
+						flycdcur = flycd
+						sendServerEvent("Turbo",p,false)
+						plr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.GettingUp)
+						--print("-Flying")
+					end
 				end
 			elseif input.KeyCode == Enum.KeyCode.T then
 				if flying == true and hovering == false then
@@ -116,14 +134,6 @@ uis.InputEnded:Connect(function(input,gameProcessed)
 			decreasing = false
 		elseif input.KeyCode == Enum.KeyCode.Space then
 			--print("-Space")
-			if flying == true then
-				flying = false
-				turbo = false
-				sendServerEvent("Flying",p,false)
-				sendServerEvent("Turbo",p,false)
-				plr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.GettingUp)
-				--print("-Flying")
-			end
 		elseif input.KeyCode == Enum.KeyCode.T then
 			turbo = false
 			sendServerEvent("Turbo",p,false)
@@ -156,9 +166,16 @@ local f = 0
 rs = game:GetService("RunService").RenderStepped:Connect(function(delta)
 
 	f = f + 1
+
+	if flycdcur > 0 then
+		flycdcur = flycdcur - delta
+		if flycdcur < 0 then
+			flycdcur = 0
+		end
+	end
 	
 	if stunned == true then
-		stunnedFrames = stunnedFrames + delta
+		stunnedFrames = stunnedFrames - delta
 	end
 
 	inc = inc + delta
@@ -168,7 +185,7 @@ rs = game:GetService("RunService").RenderStepped:Connect(function(delta)
 	if onGround and flying == true then
 		flying = false
 		turbo = false
-		sendServerEvent("Flying",p,false)
+		sendServerEvent("Flying",p,{false,speed})
 		sendServerEvent("Turbo",p,false)
 	end
 
@@ -275,7 +292,7 @@ rs = game:GetService("RunService").RenderStepped:Connect(function(delta)
 				flying = false
 				turbo = false
 				hovering = false
-				sendServerEvent("Flying",p,false)
+				sendServerEvent("Flying",p,{false,speed})
 				sendServerEvent("Turbo",p,false)
 				stunned = true
 				stunnedFrames = 0
