@@ -183,7 +183,7 @@ function enableSound(s,spd)
 	)
 
 	local g = {}
-	g.Pitch = ((1/64)*0.25)*spd + 0.5
+	g.Pitch = ((1/64)*spd/64)*20 + 0.5
 
 	s.Pitch = 0
 
@@ -202,7 +202,7 @@ function disableSound(s,spd)
 		0
 	)
 
-	local sm = ((1/64)*0.25)*spd + 0.5
+	local sm = ((1/64)*spd/64)*20 + 0.5
 
 	local g = {}
 	g.Pitch = 0

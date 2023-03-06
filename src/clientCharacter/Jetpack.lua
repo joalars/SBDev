@@ -1,5 +1,7 @@
 print("Jetpack - Local")
 
+task.wait()
+
 local uis = game:GetService("UserInputService")
 local replicatedStorage = game:GetService("ReplicatedStorage")
 
@@ -48,18 +50,20 @@ function generate(c)
 	flying = false
 	turbo = false
 	hovering = false
+	
+	local rp = c:WaitForChild("HumanoidRootPart")
 
 	attach = Instance.new("Attachment")
-	attach.Parent = c.HumanoidRootPart
+	attach.Parent = rp
 	attach.CFrame = CFrame.new(0,0,0)
 
-	alignOrientation = Instance.new("AlignOrientation",c.HumanoidRootPart)
+	alignOrientation = Instance.new("AlignOrientation",rp)
 	alignOrientation.Attachment0 = attach
 	alignOrientation.AlignType = Enum.AlignType.Parallel
 	alignOrientation.Mode = Enum.OrientationAlignmentMode.OneAttachment
 	alignOrientation.Responsiveness = 15
 
-	alignPosition = Instance.new("AlignPosition",c.HumanoidRootPart)
+	alignPosition = Instance.new("AlignPosition",rp)
 	alignPosition.Attachment0 = attach
 	alignPosition.Mode = Enum.PositionAlignmentMode.OneAttachment
 	alignPosition.Enabled = false
@@ -71,6 +75,8 @@ function generate(c)
 		rs:Disconnect()
 	end)
 end
+
+repeat task.wait() until plr.Character
 
 generate(plr.Character)
 
@@ -88,14 +94,10 @@ uis.InputBegan:Connect(function(input, gameProcessed)
 		if input.UserInputType == Enum.UserInputType.Keyboard then
 			if input.KeyCode == Enum.KeyCode.R then
 				--print("+R")
-				if flycdcur <= 0 then
-					increasing = true
-				end
+				increasing = true
 			elseif input.KeyCode == Enum.KeyCode.F then
 				--print("+F")
-				if flycdcur <= 0 then
-					decreasing = true
-				end
+				decreasing = true
 			elseif input.KeyCode == Enum.KeyCode.Space then
 				--print("+Space")
 				if flycdcur <= 0 then
@@ -173,14 +175,12 @@ rs = game:GetService("RunService").RenderStepped:Connect(function(delta)
 			flycdcur = 0
 		end
 	end
-	
+
 	if stunned == true then
-		stunnedFrames = stunnedFrames - delta
+		stunnedFrames = stunnedFrames + delta
 	end
 
 	inc = inc + delta
-
-	--print(inc - inctrg)
 
 	if onGround and flying == true then
 		flying = false
@@ -249,18 +249,20 @@ rs = game:GetService("RunService").RenderStepped:Connect(function(delta)
 		end
 	end
 
-	if increasing == true then
-		speed = speed + delta * 35
-		changed = true
-		if speed > maxSpeed then
-			speed = maxSpeed
+	if flycdcur <= 0 then
+		if increasing == true then
+			speed = speed + delta * 35
+			changed = true
+			if speed > maxSpeed then
+				speed = maxSpeed
+			end
 		end
-	end
-	if decreasing == true then
-		speed = speed - delta * 35
-		changed = true
-		if speed < 1 then
-			speed = 1
+		if decreasing == true then
+			speed = speed - delta * 35
+			changed = true
+			if speed < 1 then
+				speed = 1
+			end
 		end
 	end
 
@@ -271,13 +273,13 @@ rs = game:GetService("RunService").RenderStepped:Connect(function(delta)
 	end
 
 	if hovering == false then
-		
+
 		local rayParams = RaycastParams.new()
 		rayParams.FilterDescendantsInstances = {plr.Character}
 		rayParams.FilterType = Enum.RaycastFilterType.Exclude
 		rayParams.IgnoreWater = true
 		rayParams.RespectCanCollide = true
-		
+
 		if flying == false then
 			local rayResult = workspace:Raycast(plr.Character.HumanoidRootPart.CFrame.p, Vector3.new(0, -4.5, 0), rayParams)
 			if rayResult then
@@ -301,7 +303,7 @@ rs = game:GetService("RunService").RenderStepped:Connect(function(delta)
 			end
 		end
 	end
-	
+
 	if stunned == true and stunnedFrames < stunDuration then
 		plr.Character.Humanoid.PlatformStand = true
 	elseif stunned == true and stunnedFrames >= stunDuration then
