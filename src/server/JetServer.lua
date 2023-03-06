@@ -3,6 +3,8 @@ print("Jetpack - Server")
 
 local plr
 local replicatedStorage = game:GetService("ReplicatedStorage")
+local runService = game:GetService("RunService")
+local tweenService = game:GetService("TweenService")
 
 repeat
 	for i,v in pairs(game:GetService("Players"):GetChildren()) do
@@ -169,6 +171,34 @@ function generate(plr)
 		{"BorderSizePixel",0},
 		{"Parent",speedBG}
 	})
+end
+
+function enableSound(s)
+	local ts = s.Pitch
+	local tweenInfo = TweenInfo.new(
+		0.3,
+		Enum.EasingStyle.Linear,
+		Enum.EasingDirection.InOut,
+		0,
+		false,
+		0
+	)
+
+	local newTween = tweenService:Create(s,tweenInfo,{"Pitch",0,ts}):Play()
+end
+
+function disableSound(s)
+	local ts = s.Pitch
+	local tweenInfo = TweenInfo.new(
+		0.3,
+		Enum.EasingStyle.Linear,
+		Enum.EasingDirection.InOut,
+		0,
+		false,
+		0
+	)
+
+	local newTween = tweenService:Create(s,tweenInfo,{"Pitch",ts,0}):Play()
 end
 
 local jetpackEvent
