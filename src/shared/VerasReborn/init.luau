@@ -4,7 +4,7 @@ function _M.LoadVeras()
 
     script.Parent = __verasReborn
 
-    local version = 1
+    local version = "0.0.1"
 
     warn("Veras Reborn v"..version)
     warn("init.")
@@ -81,6 +81,7 @@ function _M.LoadVeras()
     end
 
     local function regenerateEvents()
+        print("Regenerating Events")
         for _,v in pairs(connectedEvents) do
             v:Disconnect()
         end
@@ -120,6 +121,21 @@ function _M.LoadVeras()
         end
         if foundPossibleMatch == false then
             regenerateEvents()
+        else
+            for _,ev in pairs(eventsList) do
+                local found = false
+                for _,v in pairs(replicatedStorage.Veras:GetChildren()) do
+                    if v.Name == ev[1] then
+                        if v:IsA(ev[2]) then
+                            found = true
+                        end
+                    end
+                end
+                if found == false then
+                    regenerateEvents()
+                    break
+                end
+            end
         end
     end
 
