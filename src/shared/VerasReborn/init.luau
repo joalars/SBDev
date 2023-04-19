@@ -161,6 +161,28 @@ function _M.LoadVeras()
         )
     end
 
+    players.PlayerAdded:Connect(function(p)
+        local c
+        xpcall(
+            function()
+                c = client:Clone()
+                c.Name = "VerasClient"
+                local plrgui = p:FindFirstChildOfClass("PlayerGui")
+                if plrgui then
+                    c.Parent = plrgui
+                else
+                    error()
+                end
+            end,
+            function()
+                warn("Invalid Player: "..p.Name)
+                if c then
+                    c:Destroy()
+                end
+            end
+        )
+    end)
+
     runService.Heartbeat:Connect(function(dt)
         if checkingEvents == false then
             checkingEvents = true
