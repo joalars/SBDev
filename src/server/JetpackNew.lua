@@ -16,11 +16,11 @@ function rct(a)
 	for i,v in pairs(a:GetChildren()) do
 		--print("[RCT]: Scanning - "..v.Name)
 		if (v.Name == "UpperTorso" or v.Name == "Torso") and v:IsA("BasePart") then
-			print("[RCT]: Successfully Identified: "..v.Name)
+			--print("[RCT]: Successfully Identified: "..v.Name)
 			return v
 		end
 	end
-	print("[RCT]: Search failed. Invalid character.")
+	--print("[RCT]: Search failed. Invalid character.")
 	return nil
 end
 
@@ -235,7 +235,7 @@ function restoreEvent()
 			xpcall(function()
 				--print("Message received")
 				--print(t)
-				print("Signal: "..t)
+				--print("Signal: "..t)
 				if t == "Generate" then
 					generate(plr)
 				end
@@ -253,15 +253,15 @@ function restoreEvent()
 					end
 				end
 				if t == "Flying" then
-					print("Flying signal")
+					--print("Flying signal")
 					if p.Parent == plr.Character then
-						print("Valid player")
+						--print("Valid player")
 						if a[1] == true then
-							print("True")
+							--print("True")
 							for i,v in pairs(p:GetChildren()) do
 								local f = v:FindFirstChild("Fire")
 								if f then
-									print("Fire")
+									--print("Fire")
 									f.Enabled = true
 								end
 								local f = v:FindFirstChild("Thruster")
@@ -270,11 +270,11 @@ function restoreEvent()
 								end
 							end
 						else
-							print("False")
+							--print("False")
 							for i,v in pairs(p:GetChildren()) do
 								local f = v:FindFirstChild("Fire")
 								if f then
-									print("Fire")
+									--print("Fire")
 									f.Enabled = false
 								end
 								local f = v:FindFirstChild("Thruster")
@@ -639,6 +639,8 @@ end)
 plr.CharacterAdded:Connect(function(c)
 
 	repeat task.wait() until c.HumanoidRootPart
+
+	task.wait(1)
 
 	generate(c)
 	sendServerEvent("Generate")
