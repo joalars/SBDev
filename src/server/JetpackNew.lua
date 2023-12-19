@@ -388,6 +388,11 @@ function generate(c)
 		alignPosition:Destroy()
 	end
 
+	increasing = false
+	decreasing = false
+	changed = false
+	turbo = false
+
 	alignOrientation = Instance.new("AlignOrientation",rp)
 	alignOrientation.Attachment0 = attach
 	alignOrientation.AlignType = Enum.AlignType.Parallel
