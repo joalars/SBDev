@@ -329,6 +329,9 @@ task.wait()
 local uis = game:GetService("UserInputService")
 
 local plr = game:GetService("Players").LocalPlayer
+
+task.wait(0.5)
+
 script.Parent = plr
 
 local speed = 16
