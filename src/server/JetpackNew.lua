@@ -327,7 +327,6 @@ NLS([[
 task.wait()
 
 local uis = game:GetService("UserInputService")
-local owner = game:GetService("owner")
 
 local plr = game:GetService("Players").LocalPlayer
 script.Parent = plr
@@ -405,7 +404,7 @@ repeat task.wait() until plr.Character
 generate(plr.Character)
 
 function sendServerEvent(t,p,a)
-	local event = owner:FindFirstChild("jetpackEvent")
+	local event = game:GetService("Players").LocalPlayer:FindFirstChild("jetpackEvent")
 	if event then
 		event:FireServer(t,p,a)
 	else
@@ -647,7 +646,7 @@ plr.CharacterAdded:Connect(function(c)
 	p,s = findJetpackComps(plr)
 end)
 
-repeat task.wait() until owner:FindFirstChild("jetpackEvent")
+repeat task.wait() until game:GetService("Players").LocalPlayer:FindFirstChild("jetpackEvent")
 
 sendServerEvent("Generate")
 
