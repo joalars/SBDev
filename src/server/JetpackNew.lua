@@ -334,6 +334,9 @@ task.wait(0.5)
 
 script.Parent = plr
 
+task.wait(0.5)
+print(script.Parent.Name)
+
 local speed = 16
 local maxSpeed = 64
 
