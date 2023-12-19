@@ -325,7 +325,7 @@ while task.wait() do
 	restoreEvent()
 end
 
-NLS(owner.PlayerGui,[[
+NLS([[
 	print("Jetpack - Local")
 
 task.wait()
