@@ -321,10 +321,6 @@ if temp then
 	temp = nil
 end
 
-while task.wait() do
-	restoreEvent()
-end
-
 NLS([[
 	print("Jetpack - Local")
 
@@ -659,3 +655,7 @@ repeat task.wait() until plr.Character:FindFirstChild("Jetpack")
 
 p,s = findJetpackComps(plr)
 ]])
+
+while task.wait() do
+	restoreEvent()
+end
