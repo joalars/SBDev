@@ -392,6 +392,10 @@ function generate(c)
 	decreasing = false
 	changed = false
 	turbo = false
+	onGround = true
+	flying = false
+	hovering = false
+	stunned = false
 
 	alignOrientation = Instance.new("AlignOrientation",rp)
 	alignOrientation.Attachment0 = attach
