@@ -380,6 +380,14 @@ function generate(c)
 	attach.Parent = rp
 	attach.CFrame = CFrame.new(0,0,0)
 
+	if alignOrientation ~= nil then
+		alignOrientation:Destroy()
+	end
+
+	if alignPosition ~= nil then
+		alignPosition:Destroy()
+	end
+
 	alignOrientation = Instance.new("AlignOrientation",rp)
 	alignOrientation.Attachment0 = attach
 	alignOrientation.AlignType = Enum.AlignType.Parallel
@@ -639,8 +647,6 @@ end)
 plr.CharacterAdded:Connect(function(c)
 
 	repeat task.wait() until c.HumanoidRootPart
-
-	task.wait(1)
 
 	generate(c)
 	sendServerEvent("Generate")
