@@ -674,9 +674,7 @@ repeat task.wait() until plr.Character:FindFirstChild("Jetpack")
 
 p,s = findJetpackComps(plr)
 
-while task.wait(0.5) do
-	print("Heartbeat")
-end
+while task.wait(0.5) do end
 ]])
 
 while task.wait() do
