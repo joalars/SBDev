@@ -346,7 +346,7 @@ task.wait(0.5)
 script.Parent = __JET
 
 task.wait(0.5)
-print(script.Parent.Name)
+--print(script.Parent.Name)
 
 local speed = 16
 local maxSpeed = 64
