@@ -73,6 +73,7 @@ function generate(plr)
 		{"TopSurface",Enum.SurfaceType.Smooth},
 		{"BottomSurface",Enum.SurfaceType.Smooth},
 		{"Material",Enum.Material.SmoothPlastic},
+		{"Anchored",true}
 		{"Parent",container}
 	})
 
@@ -202,6 +203,8 @@ function generate(plr)
 		{"BorderSizePixel",0},
 		{"Parent",speedBG}
 	})
+
+	p1.Anchored = false
 end
 
 function enableSound(s,spd)
