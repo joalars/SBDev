@@ -68,7 +68,6 @@ function generate(plr)
 	local p1 = ins("Part", {
 		{"Size",Vector3.new(1.25,1.7,0.2)},
 		{"Position",Vector3.new(0,5,0)},
-		{"Anchored",false},
 		{"CanCollide",false},
 		{"TopSurface",Enum.SurfaceType.Smooth},
 		{"BottomSurface",Enum.SurfaceType.Smooth},
