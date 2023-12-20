@@ -672,6 +672,7 @@ sendServerEvent("Generate")
 repeat task.wait() until plr.Character:FindFirstChild("Jetpack")
 
 p,s = findJetpackComps(plr)
+while task.wait(2) do end
 ]])
 
 while task.wait() do
