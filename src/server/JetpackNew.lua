@@ -123,7 +123,7 @@ function generate(plr)
 			}
 		)},
 		{"LightEmission",0.45},
-		{"Texture","rbxassetid://404342776"},
+		{"Texture","rbxasset://textures/particles/smoke_main.dds"},
 		{"Transparency",
 		NumberSequence.new(
 			{
