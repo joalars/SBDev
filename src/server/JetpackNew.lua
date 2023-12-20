@@ -102,7 +102,7 @@ function generate(plr)
 		{"CanCollide",false},
 		{"Parent",container}
 	})
-	
+	print("Making particle emitters...")
 	local f1 = ins("ParticleEmitter",{
 		{"Size",
 		NumberSequence.new(
@@ -140,9 +140,11 @@ function generate(plr)
 		{"Enabled",false},
 		{"Parent",p4}
 	})
+	print("Emitter1")
 	
 	local f2 = f1:Clone()
 	f2.Parent = p5
+	print("Emitter2")
 	
 	local song = ins("Sound",{
 		{"SoundId","rbxassetid://12697958247"}, --SONG
