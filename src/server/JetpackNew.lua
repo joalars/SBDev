@@ -73,7 +73,7 @@ function generate(plr)
 		{"TopSurface",Enum.SurfaceType.Smooth},
 		{"BottomSurface",Enum.SurfaceType.Smooth},
 		{"Material",Enum.Material.SmoothPlastic},
-		{"Anchored",true}
+		{"Anchored",true},
 		{"Parent",container}
 	})
 
