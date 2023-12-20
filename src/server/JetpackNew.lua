@@ -50,15 +50,7 @@ function weld(a,b,c0,c1)
 	return w
 end
 
-local first = true
-
 function generate(plr)
-
-	if first == true then
-		first = false
-	else
-		runLocal()
-	end
 
 	for i,v in pairs(plr.Character:GetChildren()) do
 		if v.Name == "Jetpack" then
