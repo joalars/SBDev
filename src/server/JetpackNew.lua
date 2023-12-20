@@ -333,13 +333,6 @@ local uis = game:GetService("UserInputService")
 
 local plr = game:GetService("Players").LocalPlayer
 
-task.wait(0.5)
-
-script.Parent = __JET
-
-task.wait(0.5)
---print(script.Parent.Name)
-
 local speed = 16
 local maxSpeed = 64
 
