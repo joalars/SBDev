@@ -343,7 +343,7 @@ local plr = game:GetService("Players").LocalPlayer
 
 task.wait(0.5)
 
-script.Parent = plr
+script.Parent = __JET
 
 task.wait(0.5)
 print(script.Parent.Name)
