@@ -323,7 +323,6 @@ if temp then
 	temp = nil
 end
 
-function runLocal()
 NLS([[
 	print("Jetpack - Local")
 
@@ -332,6 +331,8 @@ task.wait()
 local uis = game:GetService("UserInputService")
 
 local plr = game:GetService("Players").LocalPlayer
+
+script.Parent = plr
 
 local speed = 16
 local maxSpeed = 64
@@ -672,11 +673,8 @@ sendServerEvent("Generate")
 repeat task.wait() until plr.Character:FindFirstChild("Jetpack")
 
 p,s = findJetpackComps(plr)
-while task.wait(0.5) do end
 ]])
 
 while task.wait() do
 	restoreEvent()
 end
-end
-runLocal()
