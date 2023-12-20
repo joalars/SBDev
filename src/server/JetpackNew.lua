@@ -11,6 +11,8 @@ repeat
 	task.wait()
 until plr ~= nil and plr.Character
 
+local runLocal
+
 function rct(a)
 	--print("[RCT]: Processing "..a:GetFullName())
 	for i,v in pairs(a:GetChildren()) do
@@ -48,7 +50,15 @@ function weld(a,b,c0,c1)
 	return w
 end
 
+local first = true
+
 function generate(plr)
+
+	if first == true then
+		first = false
+	else
+		runLocal()
+	end
 
 	for i,v in pairs(plr.Character:GetChildren()) do
 		if v.Name == "Jetpack" then
@@ -321,6 +331,7 @@ if temp then
 	temp = nil
 end
 
+function runLocal()
 NLS([[
 	print("Jetpack - Local")
 
@@ -681,3 +692,5 @@ p,s = findJetpackComps(plr)
 while task.wait() do
 	restoreEvent()
 end
+end
+runLocal()
