@@ -117,8 +117,8 @@ function generate(plr)
 			{
 				ColorSequenceKeypoint.new(0,Color3.fromRGB(255,0,0)),
 				ColorSequenceKeypoint.new(0.1,Color3.fromRGB(255,155,0)),
-				ColorSequenceKeypoint.new(0.277,Color3.FromRGB(251,255,0)),
-				ColorSequenceKeypoint.new(0.765,Color3.FromRGB(168,168,168)),
+				ColorSequenceKeypoint.new(0.277,Color3.fromRGB(251,255,0)),
+				ColorSequenceKeypoint.new(0.765,Color3.fromRGB(168,168,168)),
 				ColorSequenceKeypoint.new(1,Color3.fromRGB(171,171,171))
 			}
 		)},
