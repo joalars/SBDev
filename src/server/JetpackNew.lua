@@ -106,25 +106,31 @@ function generate(plr)
 	local f1 = ins("ParticleEmitter",{
 		{"Size",
 		NumberSequence.new(
-			NumberSequenceKeypoint.new(0,0.188,0.175),
-			NumberSequenceKeypoint.new(0.596,0,0),
-			NumberSequenceKeypoint.new(1,0.25,0)
+			{
+				NumberSequenceKeypoint.new(0,0.188,0.175),
+				NumberSequenceKeypoint.new(0.596,0,0),
+				NumberSequenceKeypoint.new(1,0.25,0)
+			}
 		)},
 		{"Color",
 		ColorSequence.new(
-			ColorSequenceKeypoint.new(0,Color3.fromRGB(255,0,0)),
-			ColorSequenceKeypoint.new(0.1,Color3.fromRGB(255,155,0)),
-			ColorSequenceKeypoint.new(0.277,Color3.FromRGB(251,255,0)),
-			ColorSequenceKeypoint.new(0.765,Color3.FromRGB(168,168,168)),
-			ColorSequenceKeypoint.new(1,Color3.fromRGB(171,171,171))
+			{
+				ColorSequenceKeypoint.new(0,Color3.fromRGB(255,0,0)),
+				ColorSequenceKeypoint.new(0.1,Color3.fromRGB(255,155,0)),
+				ColorSequenceKeypoint.new(0.277,Color3.FromRGB(251,255,0)),
+				ColorSequenceKeypoint.new(0.765,Color3.FromRGB(168,168,168)),
+				ColorSequenceKeypoint.new(1,Color3.fromRGB(171,171,171))
+			}
 		)},
 		{"LightEmission",0.45},
 		{"Texture","rbxassetid://404342776"},
 		{"Transparency",
 		NumberSequence.new(
-			NumberSequenceKeypoint.new(1,0,0),
-			NumberSequenceKeypoint.new(0.671,0,0),
-			NumberSequenceKeypoint.new(1,1,0)
+			{
+				NumberSequenceKeypoint.new(1,0,0),
+				NumberSequenceKeypoint.new(0.671,0,0),
+				NumberSequenceKeypoint.new(1,1,0)
+			}
 		)},
 		{"Rate",500},
 		{"Lifetime",NumberRange.new(0.5)},
