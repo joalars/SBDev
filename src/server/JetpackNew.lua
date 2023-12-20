@@ -414,7 +414,7 @@ function generate(c)
 
 	died = c.Humanoid.Died:Connect(function()
 		died:Disconnect()
-		rs:Disconnect()
+		--rs:Disconnect()
 	end)
 end
 
@@ -672,7 +672,7 @@ sendServerEvent("Generate")
 repeat task.wait() until plr.Character:FindFirstChild("Jetpack")
 
 p,s = findJetpackComps(plr)
-while task.wait(2) do end
+while task.wait(0.5) do end
 ]])
 
 while task.wait() do
