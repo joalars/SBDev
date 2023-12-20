@@ -135,8 +135,8 @@ function generate(plr)
 		{"Rate",500},
 		{"Lifetime",NumberRange.new(0.5)},
 		{"RotSpeed",NumberRange.new(-50,50)},
-		{"Speed",4},
-		{"SpreadAngle",NumberRange.new(-3,3)},
+		{"Speed",NumberRange.new(4)},
+		{"SpreadAngle",Vector2.new(-3,3)},
 		{"Enabled",false},
 		{"Parent",p4}
 	})
