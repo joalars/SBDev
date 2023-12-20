@@ -127,7 +127,7 @@ function generate(plr)
 		{"Transparency",
 		NumberSequence.new(
 			{
-				NumberSequenceKeypoint.new(1,0,0),
+				NumberSequenceKeypoint.new(0,0,0),
 				NumberSequenceKeypoint.new(0.671,0,0),
 				NumberSequenceKeypoint.new(1,1,0)
 			}
