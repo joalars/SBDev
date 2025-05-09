@@ -1,5 +1,6 @@
 script.Parent = __jetpack
 print("Jetpack - Server")
+print("By joalars2")
 
 local plr
 local tweenService = game:GetService("TweenService")
